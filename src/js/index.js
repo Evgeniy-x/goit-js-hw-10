@@ -7,7 +7,7 @@ import { countryMarkup, countriesMarkup } from './markup';
 
 const DEBOUNCE_DELAY = 300;
 
-refs = {
+const refs = {
   input: document.querySelector('#search-box'),
   listCountry: document.querySelector('.country-list'),
   infoCountry: document.querySelector('.country-info'),
@@ -23,9 +23,7 @@ function onSearch(e) {
     return;
   }
 
-  fetchCountries(searchData)
-    .then(findCountries)
-    .catch(onFetchError)
+  fetchCountries(searchData).then(findCountries).catch(onFetchError);
 }
 
 function findCountries(coutriesArr) {
@@ -34,15 +32,14 @@ function findCountries(coutriesArr) {
     refs.listCountry.innerHTML = '';
     return;
   }
-    
-  if(coutriesArr.length === 1) {
-      refs.listCountry.innerHTML = countryMarkup(coutriesArr[0]);
-    } else {
-      refs.listCountry.innerHTML = countriesMarkup(coutriesArr);
-    }
+
+  if (coutriesArr.length === 1) {
+    refs.listCountry.innerHTML = countryMarkup(coutriesArr[0]);
+  } else {
+    refs.listCountry.innerHTML = countriesMarkup(coutriesArr);
+  }
 }
 
-
 function onFetchError() {
-    Notify.failure('Oops, there is no country with that name');
+  Notify.failure('Oops, there is no country with that name');
 }
